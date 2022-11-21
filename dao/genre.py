@@ -10,3 +10,22 @@ class GenreDAO:
 
 	def get_all(self):
 		return self.session.query(Genre).all()
+
+	def create(self, data):
+		new_genre = Genre(**data)
+		self.session.add(new_genre)
+		self.session.commit()
+
+		return new_genre
+
+	def update(self, genre):
+		self.session.add(genre)
+		self.session.commit()
+
+		return genre
+
+	def delete(self, uid):
+		genre = self.get_one(uid)
+
+		self.session.delete(genre)
+		self.session.commit()
