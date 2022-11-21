@@ -22,41 +22,32 @@ class MovieDAO:
 	def get_by_year(self, year):
 		return self.session.query(Movie).filter(Movie.year == year).all()
 
+	# def create(self, data):
+	# 	new_movie = Movie(**data)
+	#
+	# 	self.session.add(new_movie)
+	# 	self.session.commit()
+	#
+	# 	return new_movie
+
 	def create(self, data):
-		new_movie = Movie(**data)
+		new_movie = Movie(
+			id=data.get('id'),
+			title=data.get('title'),
+			description=data.get('description'),
+			trailer=data.get('trailer'),
+			year=data.get('year'),
+			rating=data.get('rating'),
+			genre=data.get('genre.genre'),
+			director=data.get('director.director'),
+			director_id=data.get('director_id'),
+			genre_id=data.get('genre_id'),
+			)
 
 		self.session.add(new_movie)
 		self.session.commit()
 
 		return new_movie
-
-	# def create(self, data):
-	# 	new_movie = Movie(
-	# 		id=data.get('id'),
-	# 		title=data.get('title'),
-	# 		description=data.get('description'),
-	# 		trailer=data.get('trailer'),
-	# 		year=data.get('year'),
-	# 		rating=data.get('rating'),
-	# 		genre=data.get('genre'),
-	# 		genre_id=data.get('genre_id'),
-	# 		director=data.get('director'),
-	# 		director_id=data.get('director_id'),
-	# 	)
-	# 	print(new_movie.id)
-	# 	print(new_movie.title)
-	# 	print(new_movie.description)
-	# 	print(new_movie.trailer)
-	# 	print(new_movie.year)
-	# 	print(new_movie.rating)
-	# 	print(new_movie.genre)
-	# 	print(new_movie.genre_id)
-	# 	print(new_movie.director)
-	# 	print(new_movie.director_id)
-	# 	self.session.add(new_movie)
-	# 	self.session.commit()
-	#
-	# 	return new_movie
 
 
 
