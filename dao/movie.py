@@ -31,6 +31,17 @@ class MovieDAO:
 	# 	return new_movie
 
 	def create(self, data):
+		new_director = Director(
+			name=data.get('director'),
+		)
+		new_genre = Genre(
+			name=data.get('genre'),
+		)
+
+		self.session.add(new_director)
+		self.session.add(new_genre)
+		self.session.commit()
+
 		new_movie = Movie(
 			id=data.get('id'),
 			title=data.get('title'),
@@ -38,15 +49,12 @@ class MovieDAO:
 			trailer=data.get('trailer'),
 			year=data.get('year'),
 			rating=data.get('rating'),
-			genre=data.get(data.get("genre")),
-			genre_id=data.get(data.get("genre_id")),
-			director=data.get(data.get("director")),
-			director_id=data.get(data.get("director_id")),
+			genre_id=new_genre.id,
+			director_id=new_director.id,
 			)
 
 		self.session.add(new_movie)
 		self.session.commit()
-
 		return new_movie
 
 	def update(self, movie):

@@ -31,8 +31,14 @@ def register_extensions(application):
 	api.add_namespace(genre_ns)
 
 
+def create_data():
+	with app.app_context():
+		db.create_all()
+
+
 app_config = Config()
 app = create_app(app_config)
+create_data()
 app.debug = True
 
 if __name__ == '__main__':
